@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tareas Modular</title>
+    <style>
+        /* Estilo del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Título principal */
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Caja de entrada y botón */
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Lista */
+        ol {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Botón de eliminar */
+        li button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        li button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Hacemos que el diseño sea responsive */
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            button {
+                width: 100%;
+                margin-top: 10px;
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            li button {
+                margin-top: 5px;
+                font-size: 16px;
+                padding: 5px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mi Lista de Tareas</h1>
+    <input type="text" id="nuevaTarea" placeholder="Ingresa una tarea">
+    <button id="btnAgregar">Agregar Tarea</button>
+    <ol id="lista"></ol>
+
+    <script>
+        let tareas = [];
+
+        function limpiarLista() {
+            const lista = document.querySelector('#lista');
+            while (lista.firstChild) {
+                lista.removeChild(lista.firstChild);
+            }
+        }
+
+        function mostrarTareas(tareas) {
+            limpiarLista();
+            const lista = document.querySelector('#lista');
+
+            tareas.forEach((tarea, index) => {
+                const li = document.createElement('li');
+                li.textContent = tarea;
+
+                // Agregamos un botón de eliminar a cada tarea
+                const btnEliminar = document.createElement('button');
+                btnEliminar.textContent = 'Eliminar';
+                btnEliminar.addEventListener('click', () => {
+                    eliminarTarea(index);
+                });
+
+                li.appendChild(btnEliminar);
+                lista.appendChild(li);
+            });
+        }
+
+        function agregarTarea() {
+            const input = document.querySelector('#nuevaTarea');
+            const tarea = input.value.trim();
+
+            if (tarea !== '') {
+                tareas.push(tarea);
+                input.value = '';
+                mostrarTareas(tareas);
+            }
+        }
+
+        function eliminarTarea(id) {
+            tareas.splice(id, 1);
+            mostrarTareas(tareas);
+        }
+
+        // Esperar a que el DOM se cargue
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnAgregar = document.querySelector('#btnAgregar');
+            btnAgregar.addEventListener('click', agregarTarea);
+        });
+    </script>
+</body>
+
+</html>
