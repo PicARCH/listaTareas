@@ -7,4 +7,4 @@ proyecto de lista de tareas
 
 ## Ver ejemplos en Vivo
 
-- [![Captura-de-pantalla-554.png]([![1111.png](https://i.postimg.cc/ryj1Mw9x/1111.png)](https://postimg.cc/7bCGNDdZ))
+- [![1111.png](https://i.postimg.cc/ryj1Mw9x/1111.png)](https://postimg.cc/7bCGNDdZ)
